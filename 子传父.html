@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <son @son-send="fatherReceived"></son>
+  </div>
+  <template id="son">
+    <div>
+      <button v-for="item in arrList" @click="showItem(item)">{{item.value}}</button>
+    </div>
+  </template>
+</body>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+    const son = {
+      template:'#son',
+      data(){
+        return{
+          arrList:[
+            {id:'aaa',
+             value: '热门推荐'
+            },
+            {id:'bbb',
+             value: '手机数码'
+            },
+            {id:'ccc',
+             value: '家用家电'
+            },
+            {id:'ddd',
+             value: '电脑办公'
+            }
+          ]
+        }
+      },
+      methods:{
+        showItem(item){
+          //告诉他爸爸 
+          this.$emit('son-send',item)
+        }
+      }
+    }
+    var app = new Vue({
+      el:'#app',
+      data(){
+        return{
+
+        }
+      },
+      components:{
+        son
+      },
+      methods:{
+        fatherReceived(item){
+          console.log(item)
+        }
+      }
+    })
+  </script>
+</html>

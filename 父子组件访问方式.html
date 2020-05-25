@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <div>我是父组件</div>
+    <son ><div slot="center">123</div></son>
+  </div>
+  <template id='son'>
+    <div>
+      <slot name='left'><span>左边</span></slot>
+      <slot name='center'><span>中间</span></slot>
+      <slot name='right'><span>右边</span></slot>
+      <slot>hhhh</slot>
+    </div>
+    
+  </template>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+    const son = {
+      template: '#son',
+      data() {
+        return {
+          
+        }
+      },
+      methods: {
+        buttonClick() {
+          console.log(this.$parent.name)
+        }
+      }
+    }
+    var app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          name: '我是父组件'
+        }
+      },
+      components: {
+        son
+      },
+      methods: {
+
+      }
+    })
+  </script>
+</body>
+
+</html>
